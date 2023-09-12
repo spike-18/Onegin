@@ -1,26 +1,25 @@
 #include "lib.hpp"
 
 
-
-void print_arr_1 (const int data[], size_t sizeX, size_t sizeY)
+void print_separately (const int data[], size_t sizeX, size_t sizeY)
 {
     printf("\n");
-    for(size_t j = 0; j < sizeX; j++)
+    for(size_t i = 0; i < sizeX; i++)
     {
-        for(size_t i = 0; i < sizeY; i++)
-            printf("%02d ", *(data + j*sizeX + i));
+        for(size_t j = 0; j < sizeY; j++)
+            printf("%02d ", get_element(data,sizeY,i,j));
         printf("\n");
     }
 }
 
-void print_arr_2 (const int data[])
+
+void print_united (const int data[])
 {
-    size_t sizeX = data[0];
-    size_t sizeY = data[1];
-    for(size_t j = 0; j < sizeX; j++)
-    {
-        for(size_t i = 0; i < sizeY; i++)
-            printf("%02d ", *(data + j*sizeX + i));
-        printf("\n");
-    }
+    print_separately(data+2, data[0], data[1]);
+}
+
+
+int get_element(const int data[], size_t row_size, size_t posX, size_t posY)
+{
+    return *(data + row_size*posX + posY); 
 }
