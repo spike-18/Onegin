@@ -17,6 +17,9 @@ int main(int argc, const char *argv[])
                       1,2,3,4,11,12,13,14,21,22,23,24,31,32,33,34};         // array
 
     print_separately(test_sep, sizeX, sizeY);
+
+    get_set('s', test_utd+2, sizeY, 2,2,0);
+    
     print_united(test_utd);
 
 
