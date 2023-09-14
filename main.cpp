@@ -7,22 +7,31 @@
 
 
 int main(int argc, const char *argv[])
-{
+{   
 
-    size_t sizeX = 4;
-    size_t sizeY = 4;
+    FILE *input = NULL;
 
-    int test_sep[] = {1,2,3,4,11,12,13,14,21,22,23,24,31,32,33,34};
-    int test_utd[] = {(int) sizeX, (int) sizeY,                             // size
-                      1,2,3,4,11,12,13,14,21,22,23,24,31,32,33,34};         // array
+    if( (input = fopen("hamlet.txt", "r") ) == NULL)
+    {
+        printf("Cannot open file.\n");
+        return OPEN_FILE_ERROR;
+    }
 
-    print_separately(test_sep, sizeX, sizeY);
-
-    get_set('s', test_utd+2, sizeY, 2,2,0);
+    struct stat file_info = {};
     
-    print_united(test_utd);
+    fstat(fileno(input), &file_info);
 
 
+    const size_t row_len = 100;
+    const size_t row_num = (size_t) file_info.st_size;              // so that there was always enough lines to fit any file.
+    char *text = (char*) calloc(row_len*row_num, sizeof(char));
+
+
+    read_text (row_num, row_len, text, input);
+    print_text(row_num, row_len, text);
+
+    fclose(input);
+    free  (text);
 
     return 0;
 } 
