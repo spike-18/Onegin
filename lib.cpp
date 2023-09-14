@@ -1,20 +1,17 @@
 #include "lib.hpp"
 
 
-int read_text(size_t row_len, char *text, FILE *input)
-{
-    size_t row_num = sizeof(text)/row_len;    
-    for(size_t i = 0; i < row_num; i++)
-        fgets(text + i*row_num, row_len, input);
-    return CORRECT;
+int read_text(size_t row_num, size_t row_len, char *text, FILE *input)
+{ 
+    for(size_t i = 0; i < row_num; i++)     
+        fgets(text+i*row_len, row_len, input);        
+    return STABLE;
 }
 
 
-void print_text(size_t row_len, char *text)
-{
-    size_t row_num = sizeof(text)/row_len;    
+void print_text(size_t row_num, size_t row_len, char *text)
+{    
     for (size_t i = 0; i < row_num; i++)
-        for(size_t j = 0; j < row_len; j++)
-            printf("%s", *(text + i*row_num + j));
+        printf("%s", text + i*row_len);
 }
 
