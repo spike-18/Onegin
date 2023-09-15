@@ -9,28 +9,52 @@ void create_text(Text_info *Text, const size_t row_num)
 }
 
 
-int read_text(char* buf, size_t buf_len, Text_info* Text, FILE* input)
+
+int read_text(char* buf, size_t read_len, Text_info* Text)
 { 
-    for (size_t i = 0; i < Text->row_num; i++)
+    
+    Text->text[0] = buf;
+    size_t line = 0;
+
+    for(size_t i = 0; i < read_len; i++)
     {
-        buf_len = 0;
-        getline(&buf, &buf_len, input);
-        Text->text[i] = strdup(buf);
-    }    
+        if(buf[i] == '\n')
+        {
+            line++;
+            buf[i] = '\0';
+            Text->text[line] = buf + i + 1;
+        }
+    }
+
     return STABLE;
 }
 
 
+
 void print_text(Text_info *Text)
 {    
-    for (size_t i = 0; i < Text->row_num; i++)
-        printf("%03ld - %p| %s", i, &(Text->text[i]), Text->text[i]);
+    for (size_t line = 0; line < Text->row_num; line++)
+        printf("%03ld - %p| %s\n", line, &(Text->text[line]), Text->text[line]);
 }
+
 
 
 void free_text(Text_info *Text)
 {
-    for (size_t i = 0; i < Text->row_num; i++)
-        free(Text->text[i]);
     free(Text->text);
+    free(Text);
+}
+
+
+
+size_t countrows(char* buf, size_t buf_len)
+{
+    size_t num = 1;
+    for(size_t i = 0; i < buf_len; i++)
+        if(buf[i] == '\n')
+        {
+            num++;
+        }
+
+    return num;
 }
