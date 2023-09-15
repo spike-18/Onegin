@@ -13,10 +13,9 @@ int read_text(char* buf, size_t buf_len, Text_info* Text, FILE* input)
 { 
     for (size_t i = 0; i < Text->row_num; i++)
     {
-        fgets(buf, buf_len, input);
-        Text->text[i] = (char*) calloc(strlen(buf),sizeof(char));
-
-        strfill(Text->text[i], buf);
+        buf_len = 0;
+        getline(&buf, &buf_len, input);
+        Text->text[i] = strdup(buf);
     }    
     return STABLE;
 }
