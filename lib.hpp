@@ -18,7 +18,7 @@ typedef struct
 {
     size_t row_num = 0;
     size_t row_len = 0;
-    char**  text   = NULL;
+    char** text    = NULL;
 } Text_info;
 
 
@@ -34,8 +34,9 @@ enum ERROR_CODES {
 
 
 
-int     read_text       (char* buf, size_t buf_len, Text_info* Text, FILE* input);
+int     read_text       (char* buf, size_t read_len, Text_info* Text);
 void    print_text      (Text_info *Text);
 void    free_text       (Text_info *Text);
 void    create_text     (Text_info *Text, const size_t row_num);
+size_t  countrows       (char* buf, size_t buf_len);
     
