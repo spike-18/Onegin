@@ -45,11 +45,22 @@ int main()
     assert( !read_text(buf, read_len, Text) );
 
     //printf("%s\n", buf);
-    print_text(Text);
+    //print_text(Text);
     
     fclose(input);
     free_text(Text);
     free(buf);
+
+
+    const int len = 13;
+    int* data = (int*) calloc(len+1, sizeof(int));
+    for (int i = 0; i < len+1; i++)
+    {
+        data[i] = i;
+    }
+
+    Sort(data, 0, len);
+
 
     return 0;
 } 
