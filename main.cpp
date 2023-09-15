@@ -6,8 +6,9 @@
 #endif
 
 
-int main(int argc, const char *argv[])
+int main()
 {   
+
 
            FILE *input     = NULL;
     struct stat  file_info = {};
@@ -25,12 +26,14 @@ int main(int argc, const char *argv[])
 
 
     Text_info* Text = (Text_info*) calloc(1, sizeof(Text_info));    
-    create_text(Text, 100, input);
+    create_text(Text, 1000);
 
+    //printf("%d\n", sizeof(Text->text));
 
-    char buf[1024] = {};    
+    const size_t buf_len = 200;
+    char buf[buf_len] = {};    
     
-    assert( !read_text(buf, Text, input) );
+    assert( !read_text(buf, buf_len, Text, input) );
 
     print_text(Text);
 
