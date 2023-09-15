@@ -38,5 +38,4 @@ int     read_text       (char* buf, size_t buf_len, Text_info* Text, FILE* input
 void    print_text      (Text_info *Text);
 void    free_text       (Text_info *Text);
 void    create_text     (Text_info *Text, const size_t row_num);
-int     strfill         (char* str1, char* str2);
     

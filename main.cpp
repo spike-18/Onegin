@@ -26,7 +26,7 @@ int main()
 
 
     Text_info* Text = (Text_info*) calloc(1, sizeof(Text_info));    
-    create_text(Text, 1000);
+    create_text(Text, 100);
 
     //printf("%d\n", sizeof(Text->text));
 
