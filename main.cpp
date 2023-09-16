@@ -47,26 +47,28 @@ int main()
     //printf("%s\n", buf);
     //print_text(Text);
 
-    fclose(input);
-    free_text(Text);
-    free(buf);
 
 
+    /*
     const int data_size = 20;
-    int* data = (int*) calloc(data_size, sizeof(int));
-
+    int** data = (int**) calloc(data_size, sizeof(int*));
 
     srand(time(NULL));
 
     for (int i = 0; i < data_size; i++)
-        data[i] = rand() % data_size;
+    {
+        data[i] = (int*) calloc(1, sizeof(int));
+        *data[i] = rand() % data_size;
+    }
+    */
 
-    Sort(data, 0, data_size-1);
+    Sort(Text->text, 0, Text->row_num-1, comparator);
+    print_text(Text);
 
-    #ifdef DEBUG
-        print_data(data, 0, data_size-1, 0, data_size-1, (data_size-1)/2);
-        test_sort(data, data_size);
-    #endif
+    fclose(input);
+    free_text(Text);
+    free(buf);
 
     return 0;
 }
+

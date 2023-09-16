@@ -1,8 +1,9 @@
 #include "lib.hpp"
 
 
-void Sort(int* data, int left, int right)
+void Sort(char** data, int left, int right, int (*comp)(void* a, void* b))
 {
+    //printf("Sort\n");
     if(left < right)
         switch (right - left)
         {
@@ -11,154 +12,74 @@ void Sort(int* data, int left, int right)
                 break;
 
             case TWO_ELEM:
-                sort_two(data, left, right);
+                sort_two(data, left, right, comp);
                 break;
 
             case THREE_ELEM:
-                sort_three(data, left, right);
+                sort_three(data, left, right, comp);
                 break;
 
             default:
-                int mid = partition(data, left, right);
-                Sort(data, left, mid);
-                Sort(data, mid+1, right);
+                int mid = partition(data, left, right, comp);
+                Sort(data, left, mid, comp);
+                Sort(data, mid+1, right, comp);
                 break;
         }
 }
 
-int partition(int* data, int left, int right)
+int partition(char** data, int left, int right, int (*comp)(void* a, void* b))
 {
-
-    #ifdef DEBUG
-        int lb = left;
-        int rb = right;
-        printf("Partition %d - %d:\n", left, right);
-    #endif
-
+    //printf("Partition\n");
     int piv = (right + left) / 2;
-    int mid = data[piv];
 
     while (1)
     {
-
-        #ifdef DEBUG
-            print_data(data, lb, rb ,left, right, piv);
-        #endif
-
-        while(data[left] < mid)
+        //printf("%s\n", data[right]);
+        while(comp(&data[left], &(data[piv])) < 0)
             left++;
-        while(data[right] > mid)
+        while(comp(&data[right], &data[piv]) > 0)
             right--;
 
         if(left >= right)
             return right;
 
-
-        #ifdef DEBUG
-            if (left == piv)
-                piv = right;
-            else
-            if (right == piv)
-                piv = left;
-        #endif
-
         swap(data, left++, right--);
 
-        #ifdef DEBUG
-            print_data(data, lb, rb ,left, right, piv);
-        #endif
     }
 
 }
 
 
-void sort_two(int* data, int left, int right)
+void sort_two(char** data, int left, int right, int (*comp)(void* a, void* b))
 {
-    if(data[left] > data[right])
+    if(comp(&data[left], &data[right]) > 0)
         swap(data, left, right);
 }
 
 
-void sort_three(int* data, int left, int right)
+void sort_three(char** data, int left, int right, int (*comp)(void* a, void* b))
 {
-    if(data[left] > data[right])
+    if(comp(&data[left], &data[right]) > 0)
         swap(data, left, right);
-    if(data[left] > data[left+1])
+    if(comp(&data[left], &data[left+1]) > 0)
         swap(data, left, left+1);
-    if(data[left+1] > data[right])
+    if(comp(&data[left+1], &data[right]) > 0)
         swap(data, left+1, right);
 }
 
 
 
-void swap(int* data, int left, int right)
+void swap(char** data, int left, int right)
 {
-    int c       = data[left];
+    char* c  =  data[left];
     data[left]  = data[right];
     data[right] = c;
 }
 
 
-#ifdef DEBUG
-
-void print_data(int* data, int lb, int rb, int left, int right, int piv)
+int comparator(void* a, void* b)
 {
-
-    for(int i = lb; i <= rb; i++)
-        printf("%02d ", i);
-    printf("\n");
-
-    for (int i = lb; i <= rb; i++)
-    {
-        if (i == piv)
-            printf(GRN);
-        else if (i < left)
-            printf(CYN);
-        else if (i == left)
-            printf(BLU);
-        else if (i == right)
-            printf(RED);
-        else if (left < i && i < piv && piv < right)
-            printf(BLU);
-        else if (left < piv && piv < i && i < right)
-            printf(RED);
-        else if (i > right)
-            printf(MAG);
-        else
-            printf(STD);
-
-        printf("%02d " STD, data[i]);
-    }
-
-    printf("\n");
-    for (int i = lb; i <= rb; i++)
-    {
-        if (i == piv)
-            printf("/\\ ");
-        else if (i == left)
-            printf("LL ");
-        else if (i == right)
-            printf("RR ");
-        else
-            printf("%c %c", ' ', ' ');
-    }
-
-    printf("\n\n\n");
+    return strcmp(*(const char* *)a, *(const char* *)b);
 }
 
 
-
-
-void test_sort(int* data, int data_size)
-{
-    for (int i = 0; i < data_size-1; i++)
-        if(data[i+1] < data[i])
-        {
-            printf(RED "\nARRAY BADLY SORTED\n" STD);
-            return;
-        }
-
-    printf(GRN "\nSORT TEST PASSED\n" STD);
-}
-
-#endif
