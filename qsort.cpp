@@ -40,6 +40,7 @@ int partition(int* data, int left, int right)
 
     while (1)
     {
+
         #ifdef DEBUG
             print_data(data, lb, rb ,left, right, piv);
         #endif
@@ -51,7 +52,21 @@ int partition(int* data, int left, int right)
 
         if(left >= right)
             return right;
+
+
+        #ifdef DEBUG
+            if (left == piv)
+                piv = right;
+            else
+            if (right == piv)
+                piv = left;
+        #endif
+
         swap(data, left++, right--);
+
+        #ifdef DEBUG
+            print_data(data, lb, rb ,left, right, piv);
+        #endif
     }
 
 }
@@ -67,19 +82,19 @@ void sort_two(int* data, int left, int right)
 void sort_three(int* data, int left, int right)
 {
     if(data[left] > data[right])
-        swap(data,left,right);
+        swap(data, left, right);
     if(data[left] > data[left+1])
-        swap(data,left,left+1);
+        swap(data, left, left+1);
     if(data[left+1] > data[right])
-        swap(data,left+1,right);
+        swap(data, left+1, right);
 }
 
 
 
 void swap(int* data, int left, int right)
 {
-    int c = data[left];
-    data[left] = data[right];
+    int c       = data[left];
+    data[left]  = data[right];
     data[right] = c;
 }
 
@@ -105,12 +120,12 @@ void print_data(int* data, int lb, int rb, int left, int right, int piv)
             printf(RED);
         else if (left < i && i < piv && piv < right)
             printf(BLU);
-        else if (left < i && i < piv && piv >= right)
-            printf(STD);
-        else if (i < right)
+        else if (left < piv && piv < i && i < right)
             printf(RED);
         else if (i > right)
             printf(MAG);
+        else
+            printf(STD);
 
         printf("%02d " STD, data[i]);
     }
@@ -143,7 +158,7 @@ void test_sort(int* data, int data_size)
             return;
         }
 
-    printf(GRN "\nTEST PASSED\n" STD);
+    printf(GRN "\nSORT TEST PASSED\n" STD);
 }
 
 #endif

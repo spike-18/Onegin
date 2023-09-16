@@ -54,15 +54,15 @@ enum ERROR_CODES {
 
 
 
+size_t  countrows       (char* buf, size_t buf_len);
 int     read_text       (char* buf, size_t read_len, Text_info* Text);
 void    print_text      (Text_info *Text);
 void    free_text       (Text_info *Text);
 void    create_text     (Text_info *Text, const size_t row_num);
-size_t  countrows       (char* buf, size_t buf_len);
 void    Sort            (int* data, int left, int right);
 int     partition       (int* data, int left, int right);
 void    sort_two        (int* data, int left, int right);
 void    sort_three      (int* data, int left, int right);
-void    print_data      (int* data, int lb, int rb, int left, int right, int piv);
 void    swap            (int* data, int left, int right);
+void    print_data      (int* data, int lb, int rb, int left, int right, int piv);
 void    test_sort       (int* data, int data_size);
