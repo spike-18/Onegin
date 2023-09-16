@@ -52,16 +52,14 @@ int main()
     free(buf);
 
 
-    const int data_size = 100;
+    const int data_size = 20;
     int* data = (int*) calloc(data_size, sizeof(int));
 
 
     srand(time(NULL));
 
     for (int i = 0; i < data_size; i++)
-    {
         data[i] = rand() % data_size;
-    }
 
     Sort(data, 0, data_size-1);
 
