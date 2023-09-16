@@ -11,7 +11,7 @@
 #else
     #include <sys/types.h>
     #include <sys/stat.h>
-    #include <unistd.h> 
+    #include <unistd.h>
 #endif
 
 
@@ -65,5 +65,4 @@ void    sort_two        (int* data, int left, int right);
 void    sort_three      (int* data, int left, int right);
 void    print_data      (int* data, int lb, int rb, int left, int right, int piv);
 void    swap            (int* data, int left, int right);
-
-    
+void    test_sort       (int* data, int data_size);
