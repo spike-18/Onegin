@@ -3,6 +3,7 @@
 #include <math.h>
 #include <assert.h>
 #include <string.h>
+#include <time.h>
 
 
 #ifdef _WIN32
@@ -10,8 +11,19 @@
 #else
     #include <sys/types.h>
     #include <sys/stat.h>
-    #include <unistd.h> 
+    #include <unistd.h>
 #endif
+
+
+#define STD "\033[1;0m"
+#define BLK "\u001b[30;1m"
+#define RED "\u001b[31;1m"
+#define GRN "\u001b[32;1m"
+#define YEL "\u001b[33;1m"
+#define BLU "\u001b[34;1m"
+#define MAG "\u001b[35;1m"
+#define CYN "\u001b[36;1m"
+#define WHT "\u001b[37;1m"
 
 
 typedef struct
@@ -20,6 +32,14 @@ typedef struct
     size_t row_len = 0;
     char** text    = NULL;
 } Text_info;
+
+
+
+enum NUM_OF_ELEMENTS {
+    ONE_ELEM        = 0,
+    TWO_ELEM        = 1,
+    THREE_ELEM      = 2
+};
 
 
 
@@ -39,4 +59,10 @@ void    print_text      (Text_info *Text);
 void    free_text       (Text_info *Text);
 void    create_text     (Text_info *Text, const size_t row_num);
 size_t  countrows       (char* buf, size_t buf_len);
-    
+void    Sort            (int* data, int left, int right);
+int     partition       (int* data, int left, int right);
+void    sort_two        (int* data, int left, int right);
+void    sort_three      (int* data, int left, int right);
+void    print_data      (int* data, int lb, int rb, int left, int right, int piv);
+void    swap            (int* data, int left, int right);
+void    test_sort       (int* data, int data_size);

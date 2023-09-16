@@ -1,4 +1,4 @@
-#include "lib.hpp"
+#include "qsort.cpp"
 
 
 
@@ -11,8 +11,8 @@ void create_text(Text_info *Text, const size_t row_num)
 
 
 int read_text(char* buf, size_t read_len, Text_info* Text)
-{ 
-    
+{
+
     Text->text[0] = buf;
     size_t line = 0;
 
@@ -32,9 +32,9 @@ int read_text(char* buf, size_t read_len, Text_info* Text)
 
 
 void print_text(Text_info *Text)
-{    
+{
     for (size_t line = 0; line < Text->row_num; line++)
-        printf("%03ld - %p| %s\n", line, &(Text->text[line]), Text->text[line]);
+        printf("%03d - %p| %s\n", (int) line, &(Text->text[line]), Text->text[line]);
 }
 
 

@@ -7,7 +7,7 @@
 
 
 int main()
-{   
+{
 
 
            FILE *input     = NULL;
@@ -39,17 +39,36 @@ int main()
     size_t rows_count = countrows(buf, read_len);
     //printf("%ld\n", rows_count);
 
-    Text_info* Text = (Text_info*) calloc(1, sizeof(Text_info));    
+    Text_info* Text = (Text_info*) calloc(1, sizeof(Text_info));
     create_text(Text, rows_count);
 
     assert( !read_text(buf, read_len, Text) );
 
     //printf("%s\n", buf);
-    print_text(Text);
-    
+    //print_text(Text);
+
     fclose(input);
     free_text(Text);
     free(buf);
 
+
+    const int data_size = 100;
+    int* data = (int*) calloc(data_size, sizeof(int));
+
+
+    srand(time(NULL));
+
+    for (int i = 0; i < data_size; i++)
+    {
+        data[i] = rand() % data_size;
+    }
+
+    Sort(data, 0, data_size-1);
+
+    #ifdef DEBUG
+        print_data(data, 0, data_size-1, 0, data_size-1, (data_size-1)/2);
+        test_sort(data, data_size);
+    #endif
+
     return 0;
-} 
+}
