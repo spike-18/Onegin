@@ -54,12 +54,17 @@ int main()
 
     const int len = 13;
     int* data = (int*) calloc(len+1, sizeof(int));
+
+
+    srand(time(NULL));   
+
     for (int i = 0; i < len+1; i++)
     {
-        data[i] = i;
+        data[i] = rand() % 13;
     }
 
     Sort(data, 0, len);
+    print_data(data,0,len,0,len,7);
 
 
     return 0;

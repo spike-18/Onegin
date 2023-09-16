@@ -3,6 +3,7 @@
 #include <math.h>
 #include <assert.h>
 #include <string.h>
+#include <time.h>
 
 
 #ifdef _WIN32
@@ -62,7 +63,7 @@ void    Sort            (int* data, int left, int right);
 int     partition       (int* data, int left, int right);
 void    sort_two        (int* data, int left, int right);
 void    sort_three      (int* data, int left, int right);
-void    print_data      (int* data, int left, int right);
+void    print_data      (int* data, int lb, int rb, int left, int right, int piv);
 void    swap            (int* data, int left, int right);
 
     
