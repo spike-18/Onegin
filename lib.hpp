@@ -49,19 +49,23 @@ enum ERROR_CODES {
     READ_FILE_ERROR     = 2,
     GET_SET_ERROR       = 3,
     FGETS_ERROR         = 4,
-    CHECK_PARAM_ERROR   = 5
+    CHECK_PARAM_ERROR   = 5,
+    HAS_FILENAME        = 6,
+    NO_FILENAME         = 7
 };
 
 
 
-size_t  countrows       (char* buf, size_t buf_len);
-int     read_text       (char* buf, size_t read_len, Text_info* Text);
-void    print_text      (Text_info *Text);
-void    free_text       (Text_info *Text);
-void    create_text     (Text_info *Text, const size_t row_num);
-void    Sort            (char** data, int left, int right, int (*comp)(void* a, void* b));
-int     partition       (char** data, int left, int right, int (*comp)(void* a, void* b));
-void    sort_two        (char** data, int left, int right, int (*comp)(void* a, void* b));
-void    sort_three      (char** data, int left, int right, int (*comp)(void* a, void* b));
-void    swap            (char** data, int left, int right);
-int     comparator      (void* a, void* b);
+size_t  countrows           (char* buf, size_t buf_len);
+int     read_text           (char* buf, size_t read_len, Text_info* Text);
+void    print_text          (Text_info *Text);
+void    free_text           (Text_info *Text);
+void    create_text         (Text_info *Text, const size_t row_num);
+void    Sort                (char** data, int left, int right, int (*comp)(void* a, void* b));
+int     partition           (char** data, int left, int right, int (*comp)(void* a, void* b));
+void    sort_two            (char** data, int left, int right, int (*comp)(void* a, void* b));
+void    sort_three          (char** data, int left, int right, int (*comp)(void* a, void* b));
+void    swap                (char** data, int left, int right);
+int     comparator          (void* a, void* b);
+int     checkargs           (int argc, char* argv[]);
+void    print_text_to_file  (Text_info *Text, FILE* output);

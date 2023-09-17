@@ -1,0 +1,7 @@
+unix
+windows
+apple
+microsoft
+google
+awk
+c++

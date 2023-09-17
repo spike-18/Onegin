@@ -37,6 +37,12 @@ void print_text(Text_info *Text)
         printf("%03d - %p| %s\n", (int) line, &(Text->text[line]), Text->text[line]);
 }
 
+void print_text_to_file(Text_info *Text, FILE* output)
+{
+    for (size_t line = 0; line < Text->row_num; line++)
+        fprintf(output, "%03d - %p| %s\n", (int) line, &(Text->text[line]), Text->text[line]);
+}
+
 
 
 void free_text(Text_info *Text)
@@ -57,4 +63,13 @@ size_t countrows(char* buf, size_t buf_len)
         }
 
     return num;
+}
+
+
+int checkargs(int argc, char* argv[])
+{
+    if(argc >= 2 && argv[1])
+        return HAS_FILENAME;
+    else
+        return NO_FILENAME;
 }
