@@ -34,38 +34,41 @@ typedef struct
 } Text_info;
 
 
-
 enum NUM_OF_ELEMENTS {
-    ONE_ELEM        = 0,
-    TWO_ELEM        = 1,
-    THREE_ELEM      = 2
+    ONE_ELEM    = 1,
+    TWO_ELEM    = 2,
+    THREE_ELEM  = 3
 };
 
 
-
 enum ERROR_CODES {
-    STABLE              = 0,
+    MEOW              = 0,
     OPEN_FILE_ERROR     = 1,
     READ_FILE_ERROR     = 2,
     GET_SET_ERROR       = 3,
     FGETS_ERROR         = 4,
     CHECK_PARAM_ERROR   = 5,
-    HAS_FILENAME        = 6,
-    NO_FILENAME         = 7
+    NO_FILENAME         = 6
 };
 
 
-
 size_t  countrows           (char* buf, size_t buf_len);
+int     checkargs           (int argc, char* argv[]);
 int     read_text           (char* buf, size_t read_len, Text_info* Text);
+int     isignored           (char c);
+int     str_frw_comp        (void* a, void* b);
+int     int_comp            (void* a, void* b);
 void    print_text          (Text_info *Text);
 void    free_text           (Text_info *Text);
-void    create_text         (Text_info *Text, const size_t row_num);
-void    Sort                (char** data, int left, int right, int (*comp)(void* a, void* b));
-int     partition           (char** data, int left, int right, int (*comp)(void* a, void* b));
-void    sort_two            (char** data, int left, int right, int (*comp)(void* a, void* b));
-void    sort_three          (char** data, int left, int right, int (*comp)(void* a, void* b));
-void    swap                (char** data, int left, int right);
-int     comparator          (void* a, void* b);
-int     checkargs           (int argc, char* argv[]);
 void    print_text_to_file  (Text_info *Text, FILE* output);
+void    create_text         (Text_info *Text, const size_t row_num);
+void    Sort                (void* data, size_t len, size_t el_size, int (*comp) (const void* a, const void* b));
+void    sort_two            (void* data, void* left, void* right, int (*comp) (const void* a, const void* b));
+void    sort_three          (void* data, void* left, void* right, int (*comp) (const void* a, const void* b));
+void    swap                (void* a, void* b, size_t el_size);
+void*   partition           (void* left, void* right, size_t el_size, int (*comp) (const void* a, const void* b));
+
+#ifdef DEBUG
+void    print_data          (int* lb, int* rb, int* left, int* right, int* piv);
+#endif
+void    test_sort           (int* data, int data_size);
