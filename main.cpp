@@ -58,7 +58,7 @@ int main(int argc, char* argv[])
 
         test_sort(data, data_size);
     #else
-        Sort(Text->text, Text->row_num, sizeof(char*), (int (*)(const void*, const void*)) str_frw_comp);
+        Sort(Text->text, Text->row_num, sizeof(char*), (int (*)(const void*, const void*)) str_bkw_comp);
 
         // Printing sorted data
         print_text_to_file(Text, output);

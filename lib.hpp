@@ -57,6 +57,7 @@ size_t  countrows           (char* buf, size_t buf_len);
 int     read_text           (char* buf, size_t read_len, Text_info* Text);
 int     checkargs           (int argc, char* argv[]);
 int     str_frw_comp        (void* a, void* b);
+int     str_bkw_comp        (void* a, void* b);
 int     int_comp            (void* a, void* b);
 int     isignored           (char c);
 void    print_text          (Text_info *Text);
