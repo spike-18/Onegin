@@ -3,6 +3,7 @@
 #include <math.h>
 #include <assert.h>
 #include <string.h>
+#include <ctype.h>
 #include <time.h>
 
 
@@ -42,7 +43,7 @@ enum NUM_OF_ELEMENTS {
 
 
 enum ERROR_CODES {
-    MEOW              = 0,
+    MEOW                = 0,
     OPEN_FILE_ERROR     = 1,
     READ_FILE_ERROR     = 2,
     GET_SET_ERROR       = 3,
@@ -53,22 +54,22 @@ enum ERROR_CODES {
 
 
 size_t  countrows           (char* buf, size_t buf_len);
-int     checkargs           (int argc, char* argv[]);
 int     read_text           (char* buf, size_t read_len, Text_info* Text);
-int     isignored           (char c);
+int     checkargs           (int argc, char* argv[]);
 int     str_frw_comp        (void* a, void* b);
 int     int_comp            (void* a, void* b);
+int     isignored           (char c);
 void    print_text          (Text_info *Text);
 void    free_text           (Text_info *Text);
 void    print_text_to_file  (Text_info *Text, FILE* output);
 void    create_text         (Text_info *Text, const size_t row_num);
+void    sort_two            (char* left, char* right, size_t el_size, int (*comp) (const void* a, const void* b));
+void    sort_three          (char* left, char* right, size_t el_size, int (*comp) (const void* a, const void* b));
 void    Sort                (void* data, size_t len, size_t el_size, int (*comp) (const void* a, const void* b));
-void    sort_two            (void* data, void* left, void* right, int (*comp) (const void* a, const void* b));
-void    sort_three          (void* data, void* left, void* right, int (*comp) (const void* a, const void* b));
-void    swap                (void* a, void* b, size_t el_size);
 void*   partition           (void* left, void* right, size_t el_size, int (*comp) (const void* a, const void* b));
+void    swap                (void* a, void* b, size_t el_size);
 
 #ifdef DEBUG
-void    print_data          (int* lb, int* rb, int* left, int* right, int* piv);
+void    print_data          (int** lb, int** rb, int** left, int** right, int** piv);
+void    test_sort           (int** data, int data_size);
 #endif
-void    test_sort           (int* data, int data_size);

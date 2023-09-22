@@ -10,7 +10,6 @@ int main(int argc, char* argv[])
 {
 
     // Preparing files
-
     FILE* input  = NULL;
     FILE* output = fopen("output.txt", "w");
 
@@ -23,9 +22,7 @@ int main(int argc, char* argv[])
         return OPEN_FILE_ERROR;
     }
 
-
     // Initializing buffer,
-
     struct stat file_info = {};
     fstat( fileno(input), &file_info );
 
@@ -34,7 +31,6 @@ int main(int argc, char* argv[])
 
 
     // Reading file into buffer
-
     size_t     read_len   = fread(buf, sizeof(char), buf_len, input);
     size_t     rows_count = countrows(buf, read_len);
 
@@ -45,28 +41,28 @@ int main(int argc, char* argv[])
 
 
     // Sorting data
+    #ifdef DEBUG
+        const int data_size = 20;
+        int** data = (int**) calloc(data_size, sizeof(int*));
+        assert(data);
+        srand(time(NULL));
 
-    const int data_size = 10000000;
-    int* data = (int*) calloc(data_size, sizeof(int));
+        for (int i = 0; i < data_size; i++)
+        {
+            data[i] = (int*) calloc(1,sizeof(int));
+            *data[i] = rand() % 20;
+            //printf("%d ", *data[i]);
+        }
 
-    srand(time(NULL));
+        Sort(data, data_size, sizeof(int*), (int (*) (const void* a, const void* b)) int_comp);
 
-    for (int i = 0; i < data_size; i++)
-        data[i] = rand() % data_size;
+        test_sort(data, data_size);
+    #else
+        Sort(Text->text, Text->row_num, sizeof(char*), (int (*)(const void*, const void*)) str_frw_comp);
 
-
-    Sort(data, data_size, sizeof(int), (int (*) (const void* a, const void* b)) int_comp);
-
-    test_sort(data, data_size);
-
-    // Printing sorted data
-
-    // print_text_to_file(Text, output);
-
-    //printf("%d %d %d\n", data[0], data[2], data[3]);
-    //void* a = data;
-    //printf("%d %d\n", (char*)&data[3]-(char*)&data[0], *(int*)(1+2*sizeof(int) + (int*)a));
-
+        // Printing sorted data
+        print_text_to_file(Text, output);
+    #endif
     // Clearing memory
 
     fclose(input);
