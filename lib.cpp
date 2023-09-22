@@ -82,8 +82,8 @@ int isignored(char c)
 {
     switch (c)
     {
-        case ' ':       case '0':
-        case '\"':      case '1':
+        case ' ':       case '0':       case ':':
+        case '\"':      case '1':       case ';':
         case '\'':      case '2':
         case '(':       case '3':
         case '.':       case '4':
@@ -92,8 +92,8 @@ int isignored(char c)
         case '_':       case '7':
         case '-':       case '8':
         case '[':       case '9':
-        case ']':
-        case '\n':
+        case ']':       case '!':
+        case '\n':      case '?':
             return 1;
 
         default:

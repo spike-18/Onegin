@@ -119,13 +119,49 @@ int str_frw_comp (void* a, void* b)
     return strcmp(*(const char* *) a, *(const char* *) b);
 }
 
-int int_comp (void* a, void* b)
+
+int str_bkw_comp (void* a, void* b)
 {
-    return **(int**) a - **(int**) b;
+    const char* _a = *(const char* *) a;
+    const char* _b = *(const char* *) b;
+
+    size_t a_len = 0;
+    size_t b_len = 0;
+
+    while(_a[a_len] != '\0')
+        a_len++;
+    while(_b[b_len] != '\0')
+        b_len++;
+
+    while(a_len && b_len)
+    {
+        if (isignored(_a[a_len]))
+        {
+            a_len--;
+            continue;
+        }
+        if (isignored(_b[b_len]))
+        {
+            b_len--;
+            continue;
+        }
+        if (_a[a_len] != _b[b_len])
+            return _a[a_len] > _b[b_len] ? 1 : -1;
+        a_len--;
+        b_len--;
+    }
+
+    return 0;
 }
 
 
 #ifdef DEBUG
+
+    int int_comp (void* a, void* b)
+    {
+        return **(int**) a - **(int**) b;
+    }
+
 
     void print_data (int** lb, int** rb, int** left, int** right, int** piv)
     {
