@@ -30,7 +30,6 @@
 typedef struct
 {
     size_t row_num = 0;
-    size_t row_len = 0;
     char** text    = NULL;
 } Text_info;
 

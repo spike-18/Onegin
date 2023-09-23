@@ -19,6 +19,7 @@ int read_text(char* buf, size_t read_len, Text_info* Text)
     Text->text[0] = buf + i;
 
     for ( ; i < read_len; i++)
+    {
         if (buf[i] == '\n')
         {
             buf[i] = '\0';
@@ -31,6 +32,7 @@ int read_text(char* buf, size_t read_len, Text_info* Text)
 
             Text->text[line] = buf + i;
         }
+    }
 
     return MEOW;
 }
@@ -51,7 +53,7 @@ void print_text_to_file(Text_info *Text, FILE* output)
 }
 
 
-void free_text(Text_info *Text)
+void free_text(Text_info* Text)
 {
     free(Text->text);
     free(Text);
